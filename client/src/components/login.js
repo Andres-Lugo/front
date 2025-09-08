@@ -1,59 +1,54 @@
+// /client/src/components/Login.jsx
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+import { login } from '../services/authService'; // Usamos la función desde authService
 
 function Login({ setIsAuthenticated }) {
-    const [form, setForm] = useState({ email: '', password: '' });
-    const [error, setError] = useState('');
-    const navigate = useNavigate();
+  const [form, setForm] = useState({ email: '', password: '' });
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-    const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
-    };
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-    
-        axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/login`, form)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
 
-            .then(response => {
-                console.log(response.data); // Verificar respuesta
-                localStorage.setItem('token', response.data.token);
-                setIsAuthenticated(true);
-                navigate('/');
-            })
-            .catch(err => {
-                console.error('Login error:', err.response ? err.response.data : err);
-                setError('Login failed');
-            });
-    };
-    
-    
-    
+    try {
+      await login(form.email, form.password);
+      setIsAuthenticated(true);
+      navigate('/');
+    } catch (err) {
+      console.error('Login error:', err.response?.data || err.message);
+      setError('Login failed');
+    }
+  };
 
-    return (
-        <div>
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
-                <input
-                    name="email"
-                    placeholder="Email"
-                    value={form.email}
-                    onChange={handleChange}
-                />
-                <input
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                    value={form.password}
-                    onChange={handleChange}
-                />
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-                <button type="submit">Login</button>
-            </form>
-            <p>Don't have an account? <Link to="/register">Register here</Link></p> {/* Enlace a la página de registro */}
-        </div>
-    );
+  return (
+    <div>
+      <h2>Login</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          name="email"
+          placeholder="Email"
+          value={form.email}
+          onChange={handleChange}
+        />
+        <input
+          name="password"
+          type="password"
+          placeholder="Password"
+          value={form.password}
+          onChange={handleChange}
+        />
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+        <button type="submit">Login</button>
+      </form>
+      <p>Don't have an account? <Link to="/register">Register here</Link></p>
+    </div>
+  );
 }
 
 export default Login;

@@ -19,7 +19,7 @@ function Register({ setIsAuthenticated }) {
         }
 
         try {
-            const response = await axios.post('http://localhost:5000/auth/register', { email, password });
+            const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/register`, { email, password });
             localStorage.setItem('token', response.data.token);
             setIsAuthenticated(true);
             navigate('/');  // Redirigir a la página principal
