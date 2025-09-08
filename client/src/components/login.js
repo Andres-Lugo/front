@@ -1,7 +1,7 @@
 // /client/src/components/Login.jsx
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { login } from '../services/authService'; // Usamos la función desde authService
+import { login } from '../service/authService'; // Usamos la función desde authService
 
 function Login({ setIsAuthenticated }) {
   const [form, setForm] = useState({ email: '', password: '' });

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import GeneralUtils from '../util/GeneralUtil'; // Sigue usando el utilitario
+import { register } from '../service/authService';
 
 function Register({ setIsAuthenticated }) {
     const [email, setEmail] = useState('');
