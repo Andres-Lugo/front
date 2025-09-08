@@ -59,7 +59,8 @@ function App() {
         formData.append('employeeCode', form.employeeCode);
         formData.append('cv', cv);
 
-        axios.post('http://localhost:5000/upload', formData, {
+        axios.post(`${import.meta.env.VITE_API_BASE_URL}/upload`, formData, {
+
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': `Bearer ${localStorage.getItem('token')}`  // Incluir el token

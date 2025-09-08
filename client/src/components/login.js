@@ -14,7 +14,8 @@ function Login({ setIsAuthenticated }) {
     const handleSubmit = (e) => {
         e.preventDefault();
     
-        axios.post('http://localhost:5000/auth/login', form)
+        axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/login`, form)
+
             .then(response => {
                 console.log(response.data); // Verificar respuesta
                 localStorage.setItem('token', response.data.token);

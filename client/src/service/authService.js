@@ -1,7 +1,7 @@
 // /client/src/services/authService.js
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/auth';
+const API_URL = `${import.meta.env.VITE_API_BASE_URL}/auth`;
 
 export const login = async (email, password) => {
     const res = await axios.post(`${API_URL}/login`, { email, password });
