@@ -3,56 +3,62 @@ import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 
 function Login({ setIsAuthenticated }) {
-    const [form, setForm] = useState({ email: '', password: '' });
-    const [error, setError] = useState('');
-    const navigate = useNavigate();
+  const [form, setForm] = useState({ email: '', password: '' });
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-    const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
-    };
+  // ✅ Detecta si hay URL en variables de entorno o usa localhost por defecto
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:5000";
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-    
-        axios.post('http://localhost:5000/auth/login', form)
-            .then(response => {
-                console.log(response.data); // Verificar respuesta
-                localStorage.setItem('token', response.data.token);
-                setIsAuthenticated(true);
-                navigate('/');
-            })
-            .catch(err => {
-                console.error('Login error:', err.response ? err.response.data : err);
-                setError('Login failed');
-            });
-    };
-    
-    
-    
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
-    return (
-        <div>
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
-                <input
-                    name="email"
-                    placeholder="Email"
-                    value={form.email}
-                    onChange={handleChange}
-                />
-                <input
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                    value={form.password}
-                    onChange={handleChange}
-                />
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-                <button type="submit">Login</button>
-            </form>
-            <p>Don't have an account? <Link to="/register">Register here</Link></p> {/* Enlace a la página de registro */}
-        </div>
-    );
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(`${API_BASE_URL}/auth/login`, form);
+
+      // ✅ Guardar token en localStorage
+      localStorage.setItem("token", response.data.token);
+
+      setIsAuthenticated(true);
+      navigate("/");
+    } catch (err) {
+      console.error("Login error:", err.response ? err.response.data : err);
+      setError(err.response?.data?.message || "Error al iniciar sesión");
+    }
+  };
+
+  return (
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h2 style={{ color: "skyblue" }}>Login</h2>
+      <form onSubmit={handleSubmit} style={{ display: "inline-block", padding: "20px", background: "#111", borderRadius: "10px" }}>
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          value={form.email}
+          onChange={handleChange}
+          style={{ display: "block", margin: "10px auto", padding: "10px", borderRadius: "5px" }}
+        />
+        <input
+          name="password"
+          type="password"
+          placeholder="Password"
+          value={form.password}
+          onChange={handleChange}
+          style={{ display: "block", margin: "10px auto", padding: "10px", borderRadius: "5px" }}
+        />
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        <button type="submit" style={{ marginTop: "10px", padding: "10px 20px", borderRadius: "5px" }}>Login</button>
+      </form>
+      <p style={{ marginTop: "15px" }}>
+        ¿No tienes cuenta? <Link to="/register">Regístrate aquí</Link>
+      </p>
+    </div>
+  );
 }
 
 export default Login;
