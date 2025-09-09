@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Login from './components/login';
 import Register from './components/register';
-import './styles/DarkMode.css'; 
+import './styles/DarkMode.css';
 
 function App() {
     const [form, setForm] = useState({ name: '', type: '', location: '', comments: '', employeeCode: '' });
     const [cv, setCv] = useState(null);
     const [errors, setErrors] = useState({});
-    const [isAuthenticated, setIsAuthenticated] = useState(false);  // Estado de autenticación
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     // Verifica si el usuario está autenticado
     useEffect(() => {
@@ -20,9 +20,9 @@ function App() {
     }, []);
 
     const handleLogout = () => {
-        localStorage.removeItem('token');  // Borrar el token del localStorage
-        setIsAuthenticated(false);  // Cambiar el estado de autenticación
-        window.location.href = '/login';  // Redirigir a la página de login
+        localStorage.removeItem('token');
+        setIsAuthenticated(false);
+        window.location.href = '/login';
     };
 
     const handleChange = (e) => {
@@ -59,11 +59,10 @@ function App() {
         formData.append('employeeCode', form.employeeCode);
         formData.append('cv', cv);
 
-        axios.post(`${import.meta.env.VITE_API_BASE_URL}/upload`, formData, {
-
+        axios.post(`${process.env.REACT_APP_API_BASE_URL}/upload`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`  // Incluir el token
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
         })
         .then(response => {
@@ -121,11 +120,7 @@ function App() {
                             />
                             {errors.employeeCode && <p style={{ color: 'red' }}>{errors.employeeCode}</p>}
 
-                            <input
-                                type="file"
-                                name="cv"
-                                onChange={handleFileChange}
-                            />
+                            <input type="file" name="cv" onChange={handleFileChange} />
                             {errors.cv && <p style={{ color: 'red' }}>{errors.cv}</p>}
 
                             <button type="submit">Add Candidate</button>
