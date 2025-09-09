@@ -6,17 +6,20 @@ function Candidates() {
   const [form, setForm] = useState({ name: "", type: "", location: "" });
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_BASE_URL}/candidates`)
-      .then(res => setCandidates(res.data))
-      .catch(err => console.error(err));
+    axios
+      .get(`${process.env.REACT_APP_API_BASE_URL}/candidates`)
+      .then((res) => setCandidates(res.data))
+      .catch((err) => console.error(err));
   }, []);
 
   return (
     <div>
       <h1>Candidates</h1>
       <ul>
-        {candidates.map(c => (
-          <li key={c._id}>{c.name} - {c.type} - {c.location}</li>
+        {candidates.map((c) => (
+          <li key={c._id}>
+            {c.name} - {c.type} - {c.location}
+          </li>
         ))}
       </ul>
     </div>
