@@ -4,6 +4,9 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Login from './components/login';
 import Register from './components/register';
 import './styles/DarkMode.css';
+import Candidates from "./pages/Candidates";
+
+<Route path="/candidates" element={isAuthenticated ? <Candidates /> : <Navigate to="/login" />} />
 
 function App() {
     const [form, setForm] = useState({ name: '', type: '', location: '', comments: '', employeeCode: '' });
