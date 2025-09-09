@@ -1,3 +1,4 @@
+// App.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
@@ -5,8 +6,6 @@ import Login from './components/login';
 import Register from './components/register';
 import './styles/DarkMode.css';
 import Candidates from "./pages/Candidates";
-
-<Route path="/candidates" element={isAuthenticated ? <Candidates /> : <Navigate to="/login" />} />
 
 function App() {
     const [form, setForm] = useState({ name: '', type: '', location: '', comments: '', employeeCode: '' });
@@ -84,6 +83,8 @@ function App() {
                     <div>
                         <button onClick={handleLogout}>Logout</button>
                         <h1>Candidate Manager</h1>
+
+                        {/* Formulario de candidatos */}
                         <form onSubmit={handleSubmit}>
                             <input
                                 name="name"
@@ -128,6 +129,12 @@ function App() {
 
                             <button type="submit">Add Candidate</button>
                         </form>
+
+                        {/* Rutas protegidas */}
+                        <Routes>
+                            <Route path="/candidates" element={<Candidates />} />
+                            <Route path="*" element={<Navigate to="/candidates" />} />
+                        </Routes>
                     </div>
                 ) : (
                     <Routes>
