@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import GeneralUtils from '../util/GeneralUtil';
-import { register } from '../service/authService'; // Usamos el servicio ya creado
+import GeneralUtils from '../util/GeneralUtil'; // Sigue usando el utilitario
 
 function Register({ setIsAuthenticated }) {
     const [email, setEmail] = useState('');
@@ -12,22 +12,19 @@ function Register({ setIsAuthenticated }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Validar la contraseña utilizando GeneralUtils
         if (!GeneralUtils.validatePassword(password)) {
-            setErrorMessage(
-                'The password must be at least 8 characters long, include one uppercase letter, one lowercase letter, one number, and one special character.'
-            );
+            setErrorMessage('The password must be at least 8 characters long, include one uppercase letter, one lowercase letter, one number, and one special character.');
             return;
         }
 
         try {
-            await register(email, password); // Usamos la función del servicio
+            const response = await axios.post('http://localhost:5000/auth/register', { email, password });
+            localStorage.setItem('token', response.data.token);
             setIsAuthenticated(true);
-            navigate('/');
+            navigate('/');  // Redirigir a la página principal
         } catch (error) {
-            setErrorMessage(
-                'Error en el registro: ' +
-                    (error.response?.data.message || 'Intenta de nuevo.')
-            );
+            setErrorMessage('Error en el registro: ' + (error.response?.data.message || 'Intenta de nuevo.'));
         }
     };
 
