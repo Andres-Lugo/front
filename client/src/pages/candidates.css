@@ -8,6 +8,62 @@ body {
   min-height: 100vh;
   background-attachment: fixed;
 }
+.form {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 450px;
+  margin: 30px auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #00c6ff;
+  margin-bottom: 6px;
+}
+
+.form-group input {
+  padding: 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #00c6ff;
+  background-color: #1e1e1e;
+  color: white;
+  outline: none;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus {
+  border-color: #00e1ff;
+  box-shadow: 0 0 8px rgba(0, 225, 255, 0.4);
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #00e1ff, #0055aa);
+}
 
 h1 {
   font-size: 32px;
@@ -35,23 +91,6 @@ input, select, textarea {
 input:focus, select:focus, textarea:focus {
   border-color: #00d4ff;
   box-shadow: 0 0 8px #00d4ff33;
-}
-
-
-button {
-  background: linear-gradient(135deg, #00aaff, #0077cc);
-  border: none;
-  padding: 12px;
-  color: white;
-  font-weight: bold;
-  width: 100%;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-button:hover {
-  background: linear-gradient(135deg, #00c6ff, #005fab);
 }
 
 

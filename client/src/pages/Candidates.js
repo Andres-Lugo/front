@@ -69,31 +69,45 @@ return (
     <h1>Formulario</h1>
 
     {/* Formulario */}
-    <form onSubmit={handleSubmit}>
-      <input
-        name="name"
-        placeholder="Nombre"
-        value={form.name}
-        onChange={handleChange}
-        required
-      />
-      <input
-        name="type"
-        placeholder="Tipo"
-        value={form.type}
-        onChange={handleChange}
-        required
-      />
-      <input
-        name="location"
-        placeholder="Ubicación"
-        value={form.location}
-        onChange={handleChange}
-        required
-      />
-      <button type="submit">{editingId ? "Actualizar candidato" : "Agregar candidato"}</button>
-    </form>
+    <form onSubmit={handleSubmit} className="form">
+  <div className="form-group">
+    <label htmlFor="name">Nombre</label>
+    <input
+      id="name"
+      name="name"
+      type="text"
+      value={form.name}
+      onChange={handleChange}
+      required
+    />
+  </div>
 
+  <div className="form-group">
+    <label htmlFor="type">Tipo</label>
+    <input
+      id="type"
+      name="type"
+      type="text"
+      value={form.type}
+      onChange={handleChange}
+      required
+    />
+  </div>
+
+  <div className="form-group">
+    <label htmlFor="location">Ubicación</label>
+    <input
+      id="location"
+      name="location"
+      type="text"
+      value={form.location}
+      onChange={handleChange}
+      required
+    />
+  </div>
+
+  <button type="submit">{editingId ? "Actualizar candidato" : "Agregar candidato"}</button>
+</form>
     {/* Lista de candidatos */}
     <ul>
       {candidates.map((c) => (
