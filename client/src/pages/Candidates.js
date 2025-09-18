@@ -64,48 +64,49 @@ function Candidates() {
     setEditingId(candidate._id);
   };
 
-  return (
-    <div>
-      <h1>Candidate Manager</h1>
+return (
+  <div className="container">
+    <h1>Gerente de candidatos</h1>
 
-      {/* Formulario */}
-      <form onSubmit={handleSubmit}>
-        <input
-          name="name"
-          placeholder="Name"
-          value={form.name}
-          onChange={handleChange}
-          required
-        />
-        <input
-          name="type"
-          placeholder="Type"
-          value={form.type}
-          onChange={handleChange}
-          required
-        />
-        <input
-          name="location"
-          placeholder="Location"
-          value={form.location}
-          onChange={handleChange}
-          required
-        />
-        <button type="submit">{editingId ? "Update Candidate" : "Add Candidate"}</button>
-      </form>
+    {/* Formulario */}
+    <form onSubmit={handleSubmit}>
+      <input
+        name="name"
+        placeholder="Nombre"
+        value={form.name}
+        onChange={handleChange}
+        required
+      />
+      <input
+        name="type"
+        placeholder="Tipo"
+        value={form.type}
+        onChange={handleChange}
+        required
+      />
+      <input
+        name="location"
+        placeholder="Ubicación"
+        value={form.location}
+        onChange={handleChange}
+        required
+      />
+      <button type="submit">{editingId ? "Actualizar candidato" : "Agregar candidato"}</button>
+    </form>
 
-      {/* Lista de candidatos */}
-      <ul>
-        {candidates.map((c) => (
-          <li key={c._id}>
-            {c.name} - {c.type} - {c.location}
-            <button onClick={() => handleEdit(c)}>Edit</button>
-            <button onClick={() => handleDelete(c._id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+    {/* Lista de candidatos */}
+    <ul>
+      {candidates.map((c) => (
+        <li key={c._id}>
+          {c.name} - {c.type} - {c.location}
+          <button onClick={() => handleEdit(c)}>Editar</button>
+          <button onClick={() => handleDelete(c._id)}>Borrar</button>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
 }
 
 export default Candidates;
