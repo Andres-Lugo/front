@@ -66,7 +66,7 @@ function Candidates() {
 
 return (
   <div className="container">
-    <h1>Gerente de candidatos</h1>
+    <h1>Formulario</h1>
 
     {/* Formulario */}
     <form onSubmit={handleSubmit}>
