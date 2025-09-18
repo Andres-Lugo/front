@@ -1,71 +1,89 @@
-/* Contenedor principal */
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 60px 20px;
+/* Candidates.css */
+
+body {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #f0f0f0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
   min-height: 100vh;
-  background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
+  background-attachment: fixed;
 }
 
-/* Título */
 h1 {
-  font-size: 36px;
+  font-size: 32px;
   font-weight: 700;
-  color: #00c6ff;
+  color: #00cfff;
+  text-align: center;
   margin-bottom: 40px;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.4);
 }
 
-/* Estilo del formulario */
-form {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 16px;
-  padding: 40px 30px;
-  width: 100%;
-  max-width: 420px;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-}
 
-/* Inputs, selects y textarea */
-form input,
-form select,
-form textarea {
-  width: 100%;
-  margin-bottom: 20px;
-  padding: 12px 14px;
-  font-size: 14px;
+input, select, textarea {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+  border: 1px solid #00aaff;
   border-radius: 8px;
-  border: 1px solid #00c6ff;
-  background-color: #121212;
-  color: #ffffff;
-  transition: border 0.3s, box-shadow 0.3s;
-}
-
-form input:focus,
-form select:focus,
-form textarea:focus {
-  outline: none;
-  border-color: #00e1ff;
-  box-shadow: 0 0 8px rgba(0, 225, 255, 0.3);
-}
-
-/* Botón del formulario */
-form button {
-  width: 100%;
   padding: 12px;
-  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  margin-bottom: 15px;
+  width: 100%;
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #00d4ff;
+  box-shadow: 0 0 8px #00d4ff33;
+}
+
+
+button {
+  background: linear-gradient(135deg, #00aaff, #0077cc);
   border: none;
-  border-radius: 8px;
-  font-weight: bold;
+  padding: 12px;
   color: white;
-  font-size: 15px;
+  font-weight: bold;
+  width: 100%;
+  border-radius: 8px;
   cursor: pointer;
   transition: background 0.3s;
 }
 
-form button:hover {
-  background: linear-gradient(135deg, #00e1ff, #0055aa);
+button:hover {
+  background: linear-gradient(135deg, #00c6ff, #005fab);
 }
+
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background-color: #1e1e1e;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 4px solid #00aaff;
+}
+
+li span {
+  flex: 1;
+}
+
+li button {
+  margin-left: 10px;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding-top: 50px;
+}
+
